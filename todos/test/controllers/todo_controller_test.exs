@@ -1,4 +1,5 @@
 defmodule Todos.TodoControllerTest do
+  require Logger
   use Todos.ConnCase
 
   test "#index renders a list of todos" do
@@ -7,14 +8,7 @@ defmodule Todos.TodoControllerTest do
 
     conn = get conn, todo_path(conn, :index)
 
-    assert json_response(conn, 200) == %{
-      "todos" => [%{
-        "title" => todo.title,
-        "description" => todo.description,
-        "inserted_at" => Ecto.DateTime.to_iso8601(todo.inserted_at),
-        "updated_at" => Ecto.DateTime.to_iso8601(todo.updated_at)
-      }]
-    }
+    assert json_response(conn, 200) == render_json(Todos.TodoView, "index.json", todos: [todo])
   end
 
   test "#show renders a single todo" do
@@ -23,13 +17,15 @@ defmodule Todos.TodoControllerTest do
 
     conn = get conn, todo_path(conn, :show, todo)
 
-    assert json_response(conn, 200) == %{
-      "todo" => %{
-        "title" => todo.title,
-        "description" => todo.description,
-        "inserted_at" => Ecto.DateTime.to_iso8601(todo.inserted_at),
-        "updated_at" => Ecto.DateTime.to_iso8601(todo.updated_at)
-      }
-    }
+    assert json_response(conn, 200) == render_json(Todos.TodoView, "show.json", todo: todo)
+  end
+
+  test "#create renders the todo just created" do
+    conn = build_conn()
+    todo = format_json(:todo)
+    Logger.error "#{todo}", todo: todo
+    conn = post conn, todo_path(conn, :create, todo)
+
+    assert json_response(conn, 201) == render_json(Todos.TodoView, "create.json", todo: todo)
   end
 end

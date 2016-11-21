@@ -13,4 +13,9 @@ defmodule Todos.TodoController do
     render conn, "show.json", todo: todo
   end
 
+  def show(conn, params) do
+    todo = Repo.insert!(Todo, params)
+    render conn, "create.json", todo: todo
+  end
+
 end

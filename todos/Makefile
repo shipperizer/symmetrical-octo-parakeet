@@ -1,11 +1,11 @@
-.PHONY: test dev compile deps gen_migration routes
+.PHONY: test dev compile deps gen_migration migrate routes
 
 MIGRATION=
 
 test:
 	mix test
 
-dev:
+dev: migrate
 	mix phoenix.server
 
 compile:
@@ -13,6 +13,9 @@ compile:
 
 deps:
 	mix deps.get deps.compile
+
+migrate:
+	mix ecto.migrate
 
 gen_migration:
 	mix ecto.gen.migration ${MIGRATION}
