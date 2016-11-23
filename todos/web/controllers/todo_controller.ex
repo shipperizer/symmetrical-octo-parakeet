@@ -8,14 +8,15 @@ defmodule Todos.TodoController do
     render conn, "index.json", todos: todos
   end
 
-  def show(conn, %{"id" => id}) do
+  def show(conn, %{"id" => id} = _params) do
     todo = Repo.get!(Todo, id)
     render conn, "show.json", todo: todo
   end
 
-  def show(conn, params) do
-    todo = Repo.insert!(Todo, params)
-    render conn, "create.json", todo: todo
+  def create(conn, %{"title" => title, "description" => description} = _params) do
+    _todo = %Todos.Todo{title: title, description: description}
+    todo = Repo.insert! _todo
+    conn |> put_status(:created) |> render("create.json", todo: todo)
   end
 
 end
