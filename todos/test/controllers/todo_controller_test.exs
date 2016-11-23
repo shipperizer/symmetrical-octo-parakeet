@@ -22,8 +22,9 @@ defmodule Todos.TodoControllerTest do
 
   test "#create renders the todo just created" do
     conn = build_conn()
-    todo = format_json(:todo)
-    Logger.error "#{todo}", todo: todo
+
+    todo = %{title: "oh my", description: "none"} |> Poison.encode!
+    IO.puts inspect(todo)
     conn = post conn, todo_path(conn, :create, todo)
 
     assert json_response(conn, 201) == render_json(Todos.TodoView, "create.json", todo: todo)

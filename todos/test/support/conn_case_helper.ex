@@ -3,7 +3,7 @@ defmodule Todos.ConnCaseHelper do
     view.render(template, assigns) |> format_json
   end
 
-  def format_json(data) do
-   data |> Poison.encode! |> Poison.decode!
+  defp format_json(data) do
+    data |> Poison.encode! |> Poison.decode!
  end
 end
