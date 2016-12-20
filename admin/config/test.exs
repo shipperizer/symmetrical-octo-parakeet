@@ -17,4 +17,4 @@ config :admin, Admin.Repo,
   database: "admin_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,
-  posrt: 5555
+  port: 5555
