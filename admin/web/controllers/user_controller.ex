@@ -7,7 +7,7 @@ defmodule Admin.UserController do
   alias Admin.AMQPAdapter
 
   def index(conn, _params) do
-    users = Repo.all(User)
+    users = User |> Repo.all |> Repo.preload([:videos])
     AMQPAdapter.push(msg_polish("Index call"))
     render(conn, "index.html", users: users)
   end
@@ -34,20 +34,20 @@ defmodule Admin.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+    user = User |> Repo.get!(User, id) |> Repo.preload([:videos])
     AMQPAdapter.push(msg_polish("Show call"))
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+    user = User |> Repo.get!(User, id) |> Repo.preload([:videos])
     changeset = User.changeset(user)
     AMQPAdapter.push(msg_polish("Edit call"))
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Repo.get!(User, id)
+    user = User |> Repo.get!(User, id) |> Repo.preload([:videos])
     changeset = User.changeset(user, user_params)
 
     case Repo.update(changeset) do
@@ -63,7 +63,7 @@ defmodule Admin.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+    user = User |> Repo.get!(User, id) |> Repo.preload([:videos])
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).

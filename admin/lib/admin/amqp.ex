@@ -32,7 +32,7 @@ defmodule Admin.AMQPAdapter do
       {:ok, %{}} ->
         channel
       {:error, _} ->
-        Logger.error "Channel #{name} can't be opened in amqp://#{@state.user}:#{@state.pass}@#{@state.host}:#{@state.port}"
+        Logger.error "Queue #{name} can't be opened in amqp://#{@state.user}:#{@state.pass}@#{@state.host}:#{@state.port}"
         nil
     end
   end

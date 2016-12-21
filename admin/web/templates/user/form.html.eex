@@ -24,12 +24,6 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :pets, class: "control-label" %>
-    <%= number_input f, :pets, class: "form-control" %>
-    <%= error_tag f, :pets %>
-  </div>
-
-  <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
 <% end %>

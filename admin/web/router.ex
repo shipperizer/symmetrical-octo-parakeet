@@ -17,7 +17,7 @@ defmodule Admin.Router do
     pipe_through :browser
 
     resources "/users", UserController
-
+    resources "/videos", VideoController
   end
 
   # Other scopes may use custom stacks.

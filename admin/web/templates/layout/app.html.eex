@@ -14,17 +14,20 @@
   <body>
     <div class="container">
       <header class="header">
+        <span class="logo"></span>
+        <clear>
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
-            <li><a href="http://www.phoenixframework.org/docs">Get Started</a></li>
+          <ul class="nav nav-pills">
+            <li><%= link "Users", to: user_path(@conn, :index), class: "btn-primary btn-group" %></li>
+            <li><%= link "Videos", to: video_path(@conn, :index), class: "btn-danger btn-group" %></li>
           </ul>
         </nav>
-        <span class="logo"></span>
+        <clear>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-
+      <clear>
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>

@@ -17,11 +17,6 @@
     <%= @user.bio %>
   </li>
 
-  <li>
-    <strong>Pets:</strong>
-    <%= @user.pets %>
-  </li>
-
 </ul>
 
 <%= link "Edit", to: user_path(@conn, :edit, @user) %>

@@ -5,7 +5,7 @@ defmodule Admin.User do
     field :name, :string
     field :email, :string
     field :bio, :string
-    field :pets, :integer
+    has_many :videos, Admin.Video
 
     timestamps()
   end
@@ -15,7 +15,7 @@ defmodule Admin.User do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:name, :email, :bio, :pets])
+    |> cast(params, [:name, :email, :bio])
     |> validate_required([:name, :email, :bio])
     |> validate_length(:bio, min: 2)
     |> validate_length(:bio, max: 140)
@@ -31,7 +31,6 @@ defmodule Admin.User do
       name: user.name,
       email: user.email,
       bio: user.bio,
-      pets: user.pets,
       inserted_at: user.inserted_at,
       updated_at: user.updated_at
     }
