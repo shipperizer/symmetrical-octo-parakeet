@@ -33,10 +33,10 @@ defmodule Admin.Web do
       alias Admin.Repo
       import Ecto
       import Ecto.Query
-      import AMQP
-      
+
       import Admin.Router.Helpers
       import Admin.Gettext
+      import Admin.AMQPAdapter
     end
   end
 

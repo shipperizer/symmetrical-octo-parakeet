@@ -38,7 +38,8 @@ defmodule Admin.Mixfile do
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.11"},
      {:amqp_client, github: "jbrisbin/amqp_client", override: true},
-     {:amqp, "~> 0.1.4"},
+     {:rabbit_common, github: "jbrisbin/rabbit_common", override: true},
+     {:amqp, "~> 0.1.5"},
      {:cowboy, "~> 1.0"}]
   end
 

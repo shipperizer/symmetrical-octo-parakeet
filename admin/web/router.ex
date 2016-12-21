@@ -13,10 +13,9 @@ defmodule Admin.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", Admin do
-    pipe_through :browser # Use the default browser stack
+  scope "/admin", Admin do
+    pipe_through :browser
 
-    get "/", PageController, :index
     resources "/users", UserController
 
   end
