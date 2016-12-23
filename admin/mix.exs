@@ -40,6 +40,7 @@ defmodule Admin.Mixfile do
      {:amqp_client, github: "jbrisbin/amqp_client", override: true},
      {:rabbit_common, github: "jbrisbin/rabbit_common", override: true},
      {:amqp, "~> 0.1.5"},
+     {:absinthe_plug, "~> 1.1"},
      {:cowboy, "~> 1.0"}]
   end
 

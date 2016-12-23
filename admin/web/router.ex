@@ -20,6 +20,11 @@ defmodule Admin.Router do
     resources "/videos", VideoController
   end
 
+  scope "/api" do
+    forward "/graphql", Absinthe.Plug,
+      schema: Admin.Schema
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Admin do
   #   pipe_through :api
