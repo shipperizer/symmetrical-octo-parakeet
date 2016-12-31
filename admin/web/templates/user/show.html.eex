@@ -17,6 +17,11 @@
     <%= @user.bio %>
   </li>
 
+  <li>
+    <strong>Password:</strong>
+    <%= @user.password %>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: user_path(@conn, :edit, @user) %>
