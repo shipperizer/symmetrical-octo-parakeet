@@ -7,6 +7,7 @@ defmodule Admin.Schema.Types do
     field :name, :string
     field :email, :string
     field :bio, :string
+    field :password, :string
     field :videos, list_of(:video)
   end
 

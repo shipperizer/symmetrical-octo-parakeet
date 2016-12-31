@@ -41,6 +41,8 @@ defmodule Admin.Mixfile do
      {:rabbit_common, github: "jbrisbin/rabbit_common", override: true},
      {:amqp, "~> 0.1.5"},
      {:absinthe_plug, "~> 1.1"},
+     {:comeonin, "~> 3.0"},
+     {:guardian, "~> 0.14.0"},
      {:cowboy, "~> 1.0"}]
   end
 

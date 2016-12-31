@@ -51,6 +51,7 @@ defmodule Admin.Web do
       use Phoenix.HTML
 
       import Admin.Router.Helpers
+      import Admin.ViewHelpers
       import Admin.ErrorHelpers
       import Admin.Gettext
     end

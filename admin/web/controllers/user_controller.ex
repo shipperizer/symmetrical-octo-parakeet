@@ -34,20 +34,21 @@ defmodule Admin.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = User |> Repo.get!(User, id) |> Repo.preload([:videos])
+    user = User |> Repo.get!(id) |> Repo.preload([:videos])
     AMQPAdapter.push(msg_polish("Show call"))
     render(conn, "show.html", user: user)
   end
 
   def edit(conn, %{"id" => id}) do
-    user = User |> Repo.get!(User, id) |> Repo.preload([:videos])
+    user = User |> Repo.get!(id) |> Repo.preload([:videos])
     changeset = User.changeset(user)
     AMQPAdapter.push(msg_polish("Edit call"))
     render(conn, "edit.html", user: user, changeset: changeset)
   end
 
   def update(conn, %{"id" => id, "user" => user_params}) do
-    user = User |> Repo.get!(User, id) |> Repo.preload([:videos])
+    user = User |> Repo.get!(id) |> Repo.preload([:videos])
+
     changeset = User.changeset(user, user_params)
 
     case Repo.update(changeset) do
@@ -63,7 +64,7 @@ defmodule Admin.UserController do
   end
 
   def delete(conn, %{"id" => id}) do
-    user = User |> Repo.get!(User, id) |> Repo.preload([:videos])
+    user = User |> Repo.get!(id)
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).

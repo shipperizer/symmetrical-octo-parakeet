@@ -7,6 +7,14 @@ defmodule Admin.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
+  pipeline :auth do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.EnsureAuthenticated, handler: Admin.Token
+    plug Guardian.Plug.LoadResource
   end
 
   pipeline :api do
@@ -15,6 +23,13 @@ defmodule Admin.Router do
 
   scope "/admin", Admin do
     pipe_through :browser
+
+    get "/", HomepageController, :index
+    resources "/auth", AuthController, only: [:create, :delete]
+  end
+
+  scope "/admin", Admin do
+    pipe_through [:browser, :auth]
 
     resources "/users", UserController
     resources "/videos", VideoController

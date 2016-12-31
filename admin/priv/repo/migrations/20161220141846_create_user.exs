@@ -6,6 +6,7 @@ defmodule Admin.Repo.Migrations.CreateUser do
       add :name, :string
       add :email, :string
       add :bio, :string
+      add :password, :string
 
       timestamps()
     end
